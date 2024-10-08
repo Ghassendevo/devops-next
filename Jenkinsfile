@@ -14,17 +14,16 @@ pipeline {
         }
       }
     }
-    stage('Push to Docker Hub') {
-      environment {
-        DOCKER_HUB_USERNAME = 'ghassendevo'
-        DOCKER_HUB_PASSWORD = 'TunChat123'
-      }
-      steps {
-        sh 'echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin'
-        withCredentials([string(credentialsId: 'SUDO_PASSWORD', variable: 'SUDO_PASSWORD')]) {
-          sh 'echo "${SUDO_PASSWORD}" | sudo -S docker push my-react-app:latest'
+    state('Login'){
+       steps {
+         withCredentials([string(credentialsId: 'DOCKER_HUB', variable: 'DOCKER_HUB')]) {
+           sh 'echo TunChat123 | docker login -u ghassendevo --password-stdin'
         }
       }
     }
+   stage('Push') {
+      steps {
+        sh 'docker push my-react-app:latest'
+      }
   }
 }
