@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo "Use web hook with IP ddd"
+        echo "Use web hook with IP ddddsfsf"
       }
     }
     // stage('Create Docker Image') {
