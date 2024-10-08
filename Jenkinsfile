@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Create Docker Image') {
       steps {
-        withCredentials([string(credentialsId: 'tunchat123', variable: 'tunchat123')]) {
+        withCredentials([string(credentialsId: 'pass', variable: 'pass')]) {
           sh 'echo "${SUDO_PASSWORD}" | sudo -S docker build -t my-react-app . -f Dockerfile'
         }
       }
