@@ -4,24 +4,23 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo "test "
+        echo "hello sssssdfsdfs ds"
       }
     }
     stage('Create Docker Image') {
       steps {
-        sh 'docker build -t nextjs_docker:dev .'
-        sh 'docker run --publish 3000:3000 nextjs_docker:dev'
+        sh 'sudo docker build -t my-react-app . -f Dockerfile'
       }
     }
-    // stage('Push to Docker Hub') {
-    //   environment {
-    //     DOCKER_HUB_USERNAME = 'ghassendevo'
-    //     DOCKER_HUB_PASSWORD = 'TunChat123'
-    //   }
-    //   steps {
-    //     sh 'echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}"'
-    //     sh 'docker push my-react-app:latest'
-    //   }
-    // }
+    stage('Push to Docker Hub') {
+      environment {
+        DOCKER_HUB_USERNAME = 'ghassendevo'
+        DOCKER_HUB_PASSWORD = 'TunChat123'
+      }
+      steps {
+        sh 'echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}"'
+        sh 'docker push my-react-app:latest'
+      }
+    }
   }
 }
