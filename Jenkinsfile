@@ -25,5 +25,6 @@ pipeline {
       steps {
         sh 'docker push my-react-app:latest'
       }
+   }
   }
 }
