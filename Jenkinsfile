@@ -10,7 +10,8 @@ pipeline {
     stage('Create Docker Image') {
       steps {
         withCredentials([string(credentialsId: 'SUDO_PASSWORD', variable: 'SUDO_PASSWORD')]) {
-          sh 'echo "${SUDO_PASSWORD}" | sudo -S docker build -t my-react-app . -f Dockerfile'
+          // sh 'echo "${SUDO_PASSWORD}" | sudo -S docker build -t my-react-app . -f Dockerfile'
+          sh 'docker build -t my-react-app . -f Dockerfile'
         }
       }
     }
