@@ -18,7 +18,7 @@ pipeline {
     stage('Login') {
       steps {
         // withCredentials([string(credentialsId: 'DOCKER_HUB', variable: 'DOCKER_HUB')]) {
-          sh 'echo TunChat123" | docker login -u ghassendevo --password-stdin'
+          sh 'echo TunChat123 | docker login -u ghassendevo --password-stdin'
         // }
       }
     }
