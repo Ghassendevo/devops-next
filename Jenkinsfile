@@ -9,7 +9,9 @@ pipeline {
     }
     stage('Create Docker Image') {
       steps {
-        sh 'echo "your_password" | sudo -S docker build -t my-react-app . -f Dockerfile'
+        withCredentials([string(credentialsId: 'tunchat123', variable: 'tunchat123')]) {
+          sh 'echo "${SUDO_PASSWORD}" | sudo -S docker build -t my-react-app . -f Dockerfile'
+        }
       }
     }
     stage('Push to Docker Hub') {
@@ -19,7 +21,7 @@ pipeline {
       }
       steps {
         sh 'echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin'
-        sh 'sudo docker push my-react-app:latest'
+        sh 'echo "${SUDO_PASSWORD}" | sudo -S docker push my-react-app:latest'
       }
     }
   }
