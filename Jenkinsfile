@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Create Docker Image') {
       steps {
-        withCredentials([string(credentialsId: 'pass', variable: 'pass')]) {
+        withCredentials([string(credentialsId: 'SUDO_PASSWORD', variable: 'SUDO_PASSWORD')]) {
           sh 'echo "${SUDO_PASSWORD}" | sudo -S docker build -t my-react-app . -f Dockerfile'
         }
       }
@@ -21,7 +21,9 @@ pipeline {
       }
       steps {
         sh 'echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin'
-        sh 'echo "${SUDO_PASSWORD}" | sudo -S docker push my-react-app:latest'
+        withCredentials([string(credentialsId: 'SUDO_PASSWORD', variable: 'SUDO_PASSWORD')]) {
+          sh 'echo "${SUDO_PASSWORD}" | sudo -S docker push my-react-app:latest'
+        }
       }
     }
   }
