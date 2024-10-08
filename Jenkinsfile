@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo "hello test"
+        echo "hello jenkins"
       }
     }
     // stage('Create Docker Image') {
