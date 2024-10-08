@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo "hello from docker"
+        echo "hello from ds"
       }
     }
     // stage('Create Docker Image') {
