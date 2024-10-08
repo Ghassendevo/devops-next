@@ -7,11 +7,12 @@ pipeline {
         echo "test "
       }
     }
-    // stage('Create Docker Image') {
-    //   steps {
-    //     sh 'docker build -t my-react-app . -f Dockerfile'
-    //   }
-    // }
+    stage('Create Docker Image') {
+      steps {
+        sh 'docker build -t nextjs_docker:dev .'
+        sh 'docker run --publish 3000:3000 nextjs_docker:dev'
+      }
+    }
     // stage('Push to Docker Hub') {
     //   environment {
     //     DOCKER_HUB_USERNAME = 'ghassendevo'
