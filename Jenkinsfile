@@ -14,17 +14,17 @@ pipeline {
         }
       }
     }
-    state('Login'){
-       steps {
-         withCredentials([string(credentialsId: 'DOCKER_HUB', variable: 'DOCKER_HUB')]) {
-           sh 'echo TunChat123 | docker login -u ghassendevo --password-stdin'
+    stage('Login') {
+      steps {
+        withCredentials([string(credentialsId: 'DOCKER_HUB', variable: 'DOCKER_HUB')]) {
+          sh 'echo TunChat123" | docker login -u ghassendevo --password-stdin'
         }
       }
     }
-   stage('Push') {
+    stage('Push') {
       steps {
         sh 'docker push my-react-app:latest'
       }
-   }
+    }
   }
 }
