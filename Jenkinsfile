@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push my-react-app:latest'
+        sh 'docker push ghassendevo/my-react-app:latest'
       }
     }
   }
