@@ -22,6 +22,18 @@ pipeline {
         }
       }
     }
+     stage('Check and Push') {
+            steps {
+                script {
+                    def imageExists = sh(script: 'docker manifest inspect ghassendevo/my-react-app:latest > /dev/null 2>&1', returnStatus: true) == 0
+                    if (!imageExists) {
+                        sh 'docker push ghassendevo/my-react-app:latest'
+                    } else {
+                        echo "Image already exists. Skipping push."
+                    }
+                }
+            }
+        }
     stage('Push') {
       steps {
         sh 'docker push ghassendevo/my-react-app:latest'
