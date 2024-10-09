@@ -41,7 +41,7 @@ pipeline {
     }
     stage('Run App static files'){
       steps{
-        sh 'docker run --name react-app -p 8003:8001 ghassendevo/my-react-app'
+        sh 'docker run -dt --name react-app -p 8003:80 ghassendevo/my-react-app'
       }
     }
   }
